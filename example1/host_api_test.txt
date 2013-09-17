@@ -1,0 +1,84 @@
+// test script file
+
+flag = 0;
+movetype = 0;
+
+function init(argwidget)
+{
+	setWidgetX(argwidget, 50);
+	setWidgetY(argwidget, 50);
+}
+
+function moveright(argwidget)
+{
+	currentX = getWidgetX(argwidget);
+	currentX += 1;
+	setWidgetX(argwidget, currentX);
+	if(currentX >= 300)
+	{
+		movetype += 1;
+	}
+}
+
+function movedwon(argwidget)
+{
+	currentY = getWidgetY(argwidget);
+	currentY += 1;
+	setWidgetY(argwidget, currentY);
+	if(currentY >= 300)
+	{
+		movetype++;
+	}
+}
+
+function moveleft(argwidget)
+{
+	currentX = getWidgetX(argwidget);
+	currentX -= 1;
+	setWidgetX(argwidget, currentX);
+	if(currentX <= 100)
+	{
+		movetype++;
+	}
+}
+
+function moveup(argwidget)
+{
+	currentY = getWidgetY(argwidget);
+	currentY -= 1;
+	setWidgetY(argwidget, currentY);
+	if(currentY  <= 100)
+	{
+		movetype -= 3;
+	}
+}
+
+function run(argwidget)
+{
+	temp = 5;
+	while(temp > 0)
+	{
+		temp--;
+	}
+	
+	if(movetype == 0)
+	{
+		moveright(argwidget);
+	}
+	elif(movetype == 1)
+	{
+		movedwon(argwidget);
+	}
+	elif(movetype == 2)
+	{
+		moveleft(argwidget);
+	}
+	elif(movetype == 3)
+	{
+		moveup(argwidget);
+	}
+	else
+	{
+		
+	}
+}

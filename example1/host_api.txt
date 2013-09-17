@@ -1,0 +1,77 @@
+/*
+	host api
+*/
+static void showInfo(Context* context)
+{
+ if(context->getArgvSize() == 4)
+ {
+  DObject arg;
+  DObject infoArg;
+  DObject xArg;
+  DObject yArg;
+
+  if(context->getArg(0, arg) && context->getArg(1, infoArg) && context->getArg(2, xArg) && context->getArg(3, yArg))
+  {
+   if(infoArg.type == OT_STRING && xArg.type == OT_NUM && yArg.type == OT_NUM)
+   {
+    gcn::Widget* widget = (gcn::Widget*)arg.data.ptr_data;
+    gcn::Container* widgetParent = (gcn::Container*)(widget->getParent());
+
+    if(NULL != widgetParent)
+    {
+     widgetParent->add(new gcn::Label((char* )infoArg.data.ptr_data), xArg.data.int_data, yArg.data.int_data);
+    }
+   }
+  }
+ } 
+}
+
+static void setWidgetX(Context* context)
+{
+ DObject arg;
+ DObject xarg;
+ if(context->getArg(0, arg) && context->getArg(1, xarg))
+ {
+  gcn::Widget* widget = (gcn::Widget*)arg.data.ptr_data;
+  widget->setX(xarg.data.int_data);
+ }
+}
+
+static void setWidgetY(Context* context)
+{
+ DObject arg;
+ DObject yarg;
+ if(context->getArg(0, arg) && context->getArg(1, yarg))
+ {
+  gcn::Widget* widget = (gcn::Widget*)arg.data.ptr_data;
+  widget->setY(yarg.data.int_data);
+ }
+}
+
+static void getWidgetX(Context* context)
+{
+ DObject arg;
+
+ if(context->getArg(0, arg))
+ {
+  gcn::Widget* widget = (gcn::Widget*)arg.data.ptr_data;
+
+  DObject& eax = context->getEax();
+  eax.type = OT_NUM;
+  eax.data.int_data = widget->getX();
+ }
+}
+
+static void getWidgetY(Context* context)
+{
+ DObject arg;
+
+ if(context->getArg(0, arg))
+ {
+  gcn::Widget* widget = (gcn::Widget*)arg.data.ptr_data;
+
+  DObject& eax = context->getEax();
+  eax.type = OT_NUM;
+  eax.data.int_data = widget->getY();
+ }
+}
